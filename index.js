@@ -55,14 +55,19 @@ router.get("/", async (req, res) => {
     });
 
     // Connect to the MySQL server
+    console.log("0");
     await connection.connect();
+    console.log("1")
 
     // Execute your query
     const query = "SELECT S.id, G.nazwa as nazwaGrupy, S.imie, S.nazwa as nazwisko FROM STUDENT S LEFT JOIN GRUPA G ON S.id_grupa = G.id";
     const [results] = await connection.promise().query(query);
+    console.log("2")
+
 
     // Close the connection
     connection.end();
+    console.log("3")
 
     res.status(200).send(results);
   } catch (error) {
