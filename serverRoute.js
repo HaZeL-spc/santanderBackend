@@ -8,7 +8,11 @@ router.use((req, res, next) => {
 })
 
 router.get("/", async (req, res) => {
-    res.sendStatus(200);
+    const query = "SELECT S.id, G.nazwa as nazwaGrupy, S.imie, S.nazwa as nazwisko FROM STUDENT S " + 
+    " LEFT JOIN GRUPA G ON S.id_grupa = G.id "
+    const results = await db.promise().query(query);
+
+    res.status(200).send(results[0])
 })
 
 // router.get("/getstudentsgroup", async (req, res) => {
