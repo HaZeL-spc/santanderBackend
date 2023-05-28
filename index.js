@@ -58,11 +58,13 @@ router.get("/", async (req, res) => {
     console.log("0");
     await connection.connect();
     console.log("1")
+    res.status(500).send("Internal Server Error after connect");
 
     // Execute your query
     const query = "SELECT S.id, G.nazwa as nazwaGrupy, S.imie, S.nazwa as nazwisko FROM STUDENT S LEFT JOIN GRUPA G ON S.id_grupa = G.id";
     const [results] = await connection.promise().query(query);
     console.log("2")
+    res.status(500).send("Internal Server Error after query");
 
 
     // Close the connection
